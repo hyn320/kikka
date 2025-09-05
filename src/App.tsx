@@ -14,8 +14,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/gallery" element={<Gallery />} />
-        <Route path="/profile" element={<Profile />} /> */}
+        {/* <Route path="/gallery" element={<Gallery />} /> */}
+        {/* <Route path="/profile" element={<Profile />} /> */}
       </Routes>
     </Router>
   );
