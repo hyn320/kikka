@@ -4,18 +4,21 @@ import { useState } from "react";
 import { supabase } from "../lib/supabase";
 
 export default function Home() {
+
+  const userId = import.meta.env.VITE_USER_ID;
+  const userName = import.meta.env.VITE_USER_NAME;
+
   const [to, setTo] = useState("");
-  const [from,setfrom] = useState("");
   const [praised_comment, setpraisedComment] = useState("");
   const [advice_comment, setadviceComment] = useState("");
   
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = { to, from, praised_comment, advice_comment };
+    const data = { to, praised_comment, advice_comment };
     console.log("送信するデータ:", data);
 
-    await supabase .from("card").insert({to_name: to, from_name: from, praised_comment: praised_comment, advice_comment: advice_comment});
+    await supabase .from("card").insert({to_name: to, from_name: userName, praised_comment: praised_comment, advice_comment: advice_comment});
     
   };
 
@@ -36,14 +39,6 @@ export default function Home() {
             type="text"
             value={to}
             onChange={(e) => setTo(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="comment">送り主：</label>
-          <input
-            id="from"
-            value={from}
-            onChange={(e) => setfrom(e.target.value)}
           />
         </div>
         <div>
