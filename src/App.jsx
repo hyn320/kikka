@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
-// import Gallery from "./pages/Gallery";
-// import Profile from "./pages/Profile";
+import Gallery from "./pages/Gallery";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/gallery" element={<Gallery />} />
-        <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
