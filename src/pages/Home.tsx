@@ -5,6 +5,8 @@ import { supabase } from "../lib/supabase";
 
 export default function Home() {
 
+  // const userId = 2;
+  // const userName = "鈴木花子";
   const userId = import.meta.env.VITE_USER_ID;
   const userName = import.meta.env.VITE_USER_NAME;
 
