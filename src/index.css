@@ -27,12 +27,21 @@ a:hover {
   color: #535bf2;
 }
 
+/* src/index.css */
+
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f0f4f7; /* ★この行を追加または修正★ */
+}
+
+/* ページのヘッダーやナビゲーションを中央に配置するための調整 */
+#root > div {
+  width: 100%;
 }
 
 h1 {

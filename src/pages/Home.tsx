@@ -1,66 +1,79 @@
-"use client";
-
 import { useState } from "react";
 import { supabase } from "../lib/supabase";
+import styles from "./Home.module.css";
 
 export default function Home() {
-
-  const userId = import.meta.env.VITE_USER_ID;
-  const userName = import.meta.env.VITE_USER_NAME;
-
   const [to, setTo] = useState("");
-  const [praised_comment, setpraisedComment] = useState("");
-  const [advice_comment, setadviceComment] = useState("");
-  
+  const [praisedComment, setPraisedComment] = useState("");
+  const [adviceComment, setAdviceComment] = useState("");
+  const [fromName, setFromName] = useState("Yuka");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = { to, praised_comment, advice_comment };
-    console.log("送信するデータ:", data);
-
-    await supabase .from("card").insert({to_name: to, from_name: userName, praised_comment: praised_comment, advice_comment: advice_comment});
+    const dataToInsert = { 
+      to_name: to,
+      from_name: fromName,
+      praised_comment: praisedComment,
+      advice_comment: adviceComment 
+    };
     
+    const { data, error } = await supabase.from("card").insert(dataToInsert);
+    
+    if (error) {
+      console.error("データの挿入に失敗しました:", error.message);
+    } else {
+      console.log("データの挿入に成功しました:", data);
+      setTo("");
+      setPraisedComment("");
+      setAdviceComment("");
+    }
   };
 
-  // const fetchData = async () => {
-  //   const cards = await supabase.from("card").select("*");
-  //   console.log(cards.data);
-    
-  // }
-
   return (
-    <div>
-      <p>データを入力してください</p>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="to">宛先：</label>
-          <input
-            id="to"
-            type="text"
-            value={to}
-            onChange={(e) => setTo(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="comment">ほめ：</label>
-          <textarea
-            id="praised_comment"
-            value={praised_comment}
-            onChange={(e) => setpraisedComment(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="comment">アドバイス：</label>
-          <textarea
-            id="advice_comment"
-            value={advice_comment}
-            onChange={(e) => setadviceComment(e.target.value)}
-          />
-        </div>
-        <button type="submit" >保存</button>
-      </form>
+    <div className={styles.container}>
+      <div className={styles.contentWrapper}>
+        
 
-    {/* <button onClick={fetchData}>fetch</button> */}
+        {/* カードフォームのコンテナ */}
+        <form onSubmit={handleSubmit} className={styles.cardForm}>
+          {/* to入力欄 */}
+          <div className={styles.inputGroup}>
+            <span className={styles.toLabel}>to</span>
+            <input
+              id="to"
+              type="text"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+              className={styles.formInput}
+              placeholder="宛先を入力"
+            />
+          </div>
+
+          {/* ほめ・アドバイス入力欄 */}
+          <div className={styles.textareaGroup}>
+            <textarea
+              id="praised_comment"
+              value={praisedComment}
+              onChange={(e) => setPraisedComment(e.target.value)}
+              className={styles.formTextarea}
+              placeholder="ほめ言葉を入力してください"
+            />
+            <textarea
+              id="advice_comment"
+              value={adviceComment}
+              onChange={(e) => setAdviceComment(e.target.value)}
+              className={styles.formTextarea}
+              placeholder="アドバイスを入力してください"
+            />
+          </div>
+
+          <div className={styles.fromName}>from {fromName}</div>
+          
+          <div className={styles.submitButtonContainer}>
+            <button type="submit" className={styles.submitButton}>+</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
