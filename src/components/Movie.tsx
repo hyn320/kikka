@@ -1,7 +1,8 @@
 import React, { useState, } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Movie ({onFinish}: { onFinish: () => void}) {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // const [showVideo, setShowVideo] = useState(true);
     // const autoEnd = () => {
     //     navigate("/");
@@ -13,8 +14,9 @@ export default function Movie ({onFinish}: { onFinish: () => void}) {
         if (fadeOut) return;
         setFadeOut(true); // フェード開始
         setTimeout(() => {
-        onFinish(); // フェード終わったら遷移
-        }, 1000); // フェード時間に合わせる（0.8s）
+            navigate("/");
+            onFinish(); // フェード終わったら遷移
+        }, 800); // フェード時間に合わせる（0.8s）
     };
 
     return (

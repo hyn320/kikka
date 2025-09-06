@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import styles from "./Card.module.css";
 
 interface CardProps {
   praiseText: string;
@@ -7,49 +7,44 @@ interface CardProps {
   toName: string;
   fromName: string;
   date: string;
-  initialSide?: "front" | "back";
 }
 
-export default function Card({ praiseText, adviceText, toName, fromName, date, initialSide = "front" }: CardProps) {
-  const [flipped, setFlipped] = useState(initialSide === "back");
+export default function Card({
+  praiseText,
+  adviceText,
+  toName,
+  fromName,
+  date,
+}: CardProps) {
+  const [flipped, setFlipped] = useState(false);
+
+  const splitedDate = date.split('T');
+
 
   return (
-    <div
-      onClick={() => setFlipped(!flipped)}
-      className="w-full h-40 cursor-pointer perspective"
-    >
-      <motion.div
-        className="relative w-full h-full"
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.6 }}
+    <div className={styles.cardContainer} onClick={() => setFlipped(!flipped)}>
+      <div
+        className={styles.cardInner}
+        style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
       >
-        <div className="absolute w-full h-full backface-hidden bg-yellow-100 rounded-xl p-4 shadow">
+        {/* 表 */}
+        <div className={styles.cardFront}>
+          <p className={styles.titleFront}>✨ 褒め ✨</p>
+          <p>To. {toName}</p>
           <p>{praiseText}</p>
+          <p>From. {fromName}</p>
+          <p className={styles.date}>{splitedDate[0]}</p>
         </div>
 
-        <div className="absolute w-full h-full backface-hidden bg-green-100 rounded-xl p-4 shadow rotateY-180">
+        {/* 裏 */}
+        <div className={styles.cardBack}>
+          <p className={styles.titleBack}>💡 アドバイス</p>
+          <p>To. {toName}</p>
           <p>{adviceText || "アドバイスはありません"}</p>
-        </div>
-      </motion.div>
-
-      {/* {flipped ? (
-        <div>
-          <p>To. {toName}</p>
-          <p className="font-semibold text-blue-700 mb-2">💡 アドバイス</p>
-          <p>{adviceText ? adviceText : "アドバイスなし"}</p>
           <p>From. {fromName}</p>
-          <p>{date}</p>
+          <p className={styles.date}>{splitedDate[0]}</p>
         </div>
-      ) : (
-        <div>
-          <p>To. {toName}</p>
-          <p className="font-semibold text-green-700 mb-2">✨ 褒め ✨</p>
-          <p>{praiseText}</p>
-          <p>From. {fromName}</p>
-          <p>{date}</p>
-        </div>
-      )} */}
-
+      </div>
     </div>
   );
 }

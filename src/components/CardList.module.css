@@ -1,0 +1,7 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem; /* Tailwind の gap-4 相当 */
+  height: 100vh; /* Tailwind の h-screen 相当 */
+  overflow-y: auto;
+}
