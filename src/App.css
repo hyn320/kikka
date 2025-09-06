@@ -29,6 +29,13 @@ body {
   padding: 1rem 2rem;
 }
 
+/* 新規追加: ナビゲーションとアイコンをグループ化 */
+.navAndIcons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* ナビゲーションとアイコン間のスペース */
+}
+
 /* ナビゲーションリンクのコンテナ */
 .navLinks {
   display: flex;

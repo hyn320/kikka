@@ -70,7 +70,7 @@ export default function Home() {
           <div className={styles.fromName}>from {fromName}</div>
           
           <div className={styles.submitButtonContainer}>
-            <button type="submit" className={styles.submitButton}>+</button>
+            <button type="submit" className={styles.submitButton}>送信</button>
           </div>
         </form>
       </div>
