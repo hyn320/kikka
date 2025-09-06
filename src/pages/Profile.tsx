@@ -60,7 +60,7 @@ export default function Profile() {
           <p className="font-semibold text-lg">{name}</p>
           <p className="text-gray-500">所属: {community}</p>
           <p className="text-gray-500">社内メール: {email}</p>
-          <p className="text-gray-500">入社日: {joinedAt}</p>
+          <p className="text-gray-500">メンバーになった日: {joinedAt}</p>
         </div>
       </div>
 
