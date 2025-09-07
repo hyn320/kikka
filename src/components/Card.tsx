@@ -19,13 +19,13 @@ export default function Card({ praiseText, adviceText, toName, fromName, date, t
 
   const cardClassName = flipped ? styles.adviceCard : styles.praiseCard;
   const adviceTextClassName = type === "received" ? styles.adviceTextReceived : styles.adviceTextSent;
-  const isrecieve = type === "received" ? styles.recievedCard : "";
+  const isReceived = type === "received" ? styles.recievedCard : "";
 
   return (
-  <div
-    className={`${styles.card} ${cardClassName} ${isrecieve}`}
-    onClick={() => setFlipped(!flipped)}
-  >
+    <div
+      className={`${styles.card} ${cardClassName} ${isReceived}`}
+      onClick={() => setFlipped(!flipped)}
+    >
       {/* 日付は絶対配置なので、ここには表示しない */}
 
       {flipped ? (
@@ -50,21 +50,9 @@ export default function Card({ praiseText, adviceText, toName, fromName, date, t
           <div className={styles.footer}>
             <p>From. {fromName}</p>
             <p>{date}</p>
-
-      <motion.div
-        className="relative w-full h-full"
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="absolute w-full h-full backface-hidden bg-yellow-100 rounded-xl p-4 shadow">
-          <p>{praiseText}</p>
+          </div>
         </div>
-
-        <div className="absolute w-full h-full backface-hidden bg-green-100 rounded-xl p-4 shadow rotateY-180">
-          <p>{adviceText || "アドバイスはありません"}</p>
-        </div>
-      </motion.div>
-
+      )}
     </div>
   );
 }
