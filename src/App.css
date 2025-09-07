@@ -89,3 +89,50 @@ body {
 /* #rootのmax-width, padding, text-align は body, mainHeader で制御されるため削除 */
 /* .logo, .card, .read-the-docs 関連のスタイルも削除 */
 /* @keyframes logo-spin や @media (prefers-reduced-motion: no-preference) も削除 */
+
+/* ナビゲーションリンクのスタイル */
+.navLinks a {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none; /* 下線を削除 */
+  color: #333; /* デフォルトの文字色 */
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* アクティブなリンクのスタイル */
+.navLinks a.active {
+  background-color: #26667f; /* 選択中の背景色 */
+  color: white; /* 選択中の文字色 */
+  font-weight: bold; /* 選択中の文字を太くする */
+}
+
+/* src/App.css */
+
+/* ...（省略）... */
+
+/* ナビゲーションリンクとボタンの共通スタイル */
+.navLinks a, .navLinks button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  outline: none; /* ← ここを追加：黒い枠線を消す */
+}
+
+/* アクティブなリンクとボタンのスタイル */
+.navLinks a.active, .navLinks button.active {
+  background-color: #26667f;
+  color: white;
+  font-weight: bold;
+}
+
+/* フォーカス時のスタイル（アクセシビリティ対応） */
+.navLinks a:focus, .navLinks button:focus {
+  box-shadow: 0 0 0 2px rgba(38, 102, 127, 0.5); /* ぼんやりした青色のシャドウ */
+}

@@ -1,0 +1,96 @@
+/* Profile.module.css */
+
+/* プロフィールコンテナのスタイル */
+.profileContainer {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 共通の見出しスタイル */
+.heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* ユーザー情報のセクション */
+.userInfoSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* アバター画像 */
+.avatar {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  object-fit: cover;
+}
+
+/* ユーザー情報テキストのコンテナ */
+.infoTextContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ユーザー名 */
+.userName {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+/* 所属やメールアドレスなどの情報 */
+.detailText {
+  color: #6b7280;
+}
+
+/* ボタン群のコンテナ */
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 共通ボタンのスタイル */
+.button {
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 編集ボタン（青色） */
+.editButton {
+  background-color: #26667f;
+}
+
+/* 設定ボタン（灰色） */
+.settingsButton {
+  background-color: #6b7280;
+}
+
+
+/* 設定画面のコンテナ */
+.settingsContainer {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 設定画面のボタンコンテナ */
+.settingsButtonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* 戻るボタン（赤色） */
+.backButton {
+  background-color: #ef4444;
+}

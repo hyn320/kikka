@@ -1,4 +1,7 @@
+// Card.tsx
+
 import React, { useState } from "react";
+import styles from "./Card.module.css";
 
 interface CardProps {
   praiseText: string;
@@ -6,31 +9,46 @@ interface CardProps {
   toName: string;
   fromName: string;
   date: string;
+  type: "received" | "sent";
 }
 
-export default function Card({ praiseText, adviceText, toName, fromName, date }: CardProps) {
+export default function Card({ praiseText, adviceText, toName, fromName, date, type }: CardProps) {
   const [flipped, setFlipped] = useState(false);
 
+  const cardClassName = flipped ? styles.adviceCard : styles.praiseCard;
+  const adviceTextClassName = type === "received" ? styles.adviceTextReceived : styles.adviceTextSent;
+  const isrecieve = type === "received" ? styles.recievedCard : "";
+
   return (
-    <div className="border rounded-xl shadow p-4 bg-white cursor-pointer transition-transform duration-300"
-         onClick={() => setFlipped(!flipped)}
-    >
+  <div
+    className={`${styles.card} ${cardClassName} ${isrecieve}`}
+    onClick={() => setFlipped(!flipped)}
+  >
+      {/* 日付は絶対配置なので、ここには表示しない */}
+
       {flipped ? (
-        <div>
-          <p>To. {toName}</p>
-          <p className="font-semibold text-blue-700 mb-2">💡 アドバイス</p>
-          <p>{adviceText ? adviceText : "アドバイスなし"}</p>
-          <p>From. {fromName}</p>
-          <p>{date}</p>
+        <div className={styles.cardContent}>
+          {type === "sent" && <p>To. {toName}</p>}
+          <div className={styles.categoryAndText}>
+            <p className={adviceTextClassName}>💡 アドバイス 💡</p>
+            <p>{adviceText ? adviceText : "アドバイスなし"}</p>
+          </div>
+          <div className={styles.footer}>
+            <p>From. {fromName}</p>
+            <p>{date}</p>
+          </div>
         </div>
       ) : (
-        <div>
-          <p>To. {toName}</p>
-          <p className="font-semibold text-green-700 mb-2">✨ 褒め ✨</p>
-          <p>{praiseText}</p>
-          <p>From. {fromName}</p>
-          <p>{date}</p>
-
+        <div className={styles.cardContent}>
+          {type === "sent" && <p>To. {toName}</p>}
+          <div className={styles.categoryAndText}>
+            <p className={styles.praiseText}>✨ 褒め ✨</p>
+            <p>{praiseText}</p>
+          </div>
+          <div className={styles.footer}>
+            <p>From. {fromName}</p>
+            <p>{date}</p>
+          </div>
         </div>
       )}
     </div>

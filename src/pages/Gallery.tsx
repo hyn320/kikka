@@ -1,66 +1,51 @@
+// src/pages/Gallery.tsx
 import React, { useState } from "react";
-//import { cards } from "../data/sampleData";
-//import Card from "../components/Card";
-//import { Routes, Route, Link } from "react-router-dom";
 import CardList from "../components/CardList";
 import { motion, AnimatePresence } from "framer-motion";
-
+import styles from "./Gallery.module.css";
+// App.cssのスタイルはApp.tsxでグローバルに読み込まれているため、ここでのインポートは不要です。
 
 export default function Gallery() {
+  const userName = import.meta.env.VITE_USER_NAME;
+  const userId = import.meta.env.VITE_USER_ID;
+  const [tab, setTab] = useState<"received" | "sent">("received");
 
-    const userName = import.meta.env.VITE_USER_NAME;
-    const userId = import.meta.env.VITE_USER_ID;
-    const [tab, setTab] = useState<"received" | "sent">("received");
-
-    return (
-    <div className="p-4 h-screen overflow-y-auto">
-        <h1 className="text-xl font-bold mb-4">ギャラリー</h1>
-        <div className="flex mb-4 gap-4">
+  return (
+    <div className={styles.galleryContainer}>
+      <h1 className={styles.heading}>ギャラリー</h1>
+      
+      <div className="navLinks">
         <button
-            className={`px-4 py-2 rounded ${
-            tab === "received" ? "bg-blue-300" : "bg-blue-100"
-            }`}
-            onClick={() => setTab("received")}
+          className={tab === "received" ? "active" : ""}
+          onClick={() => setTab("received")}
         >
-            受信
+          受け取り済
         </button>
         <button
-            className={`px-4 py-2 rounded ${
-            tab === "sent" ? "bg-green-300" : "bg-green-100"
-            }`}
-            onClick={() => setTab("sent")}
+          className={tab === "sent" ? "active" : ""}
+          onClick={() => setTab("sent")}
         >
-            送信
+          送信済
         </button>
-        </div>
-
-        {/*<div className="grid grid-cols-2 gap-4">
-        {cards.map((c) => (
-            <Card
-            key={c.id}
-            praiseText={c.praiseText}
-            adviceText={c.adviceText}
-            />
-        ))}
-        </div>
-        <Routes>
-        <Route path="receive" element={<CardList type="received" />} />
-        <Route path="send" element={<CardList type="sent" />} />
-        </Routes>*/}
-
-        <div className="overflow-hidden">
-        <AnimatePresence exitBeforeEnter>
-            <motion.div
+      </div>
+      
+      <div className={styles.cardListContainer}>
+        <AnimatePresence mode="wait">
+          <motion.div
             key={tab}
             initial={{ x: tab === "received" ? 300 : -300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: tab === "received" ? -300 : 300, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            >
-            <CardList type={tab} userName={userName} />
-            </motion.div>
+          >
+            {tab === "received" ? (
+              <CardList type="received" userName={userName} />
+            ) : (
+              <CardList type="sent" userName={userName} />
+            )}
+          </motion.div>
         </AnimatePresence>
-        </div>
+      </div>
     </div>
-    );
+  );
 }

@@ -6,7 +6,9 @@ export default function Home() {
   const [to, setTo] = useState("");
   const [praisedComment, setPraisedComment] = useState("");
   const [adviceComment, setAdviceComment] = useState("");
-  const [fromName, setFromName] = useState("Yuka");
+  const fromName = import.meta.env.VITE_USER_NAME;
+  console.log(fromName);
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

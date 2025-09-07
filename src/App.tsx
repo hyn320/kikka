@@ -1,5 +1,5 @@
 // src/App.tsx
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import Profile from "./pages/Profile";
@@ -13,17 +13,16 @@ export default function App() {
     <Router>
       <div>
         <div className="mainHeader">
-          {/* 修正点1: logoAreaをヘッダーの先頭に移動 */}
           <div className="logoArea">
             <img src={companyLogo} alt="Company Logo" className="logoIcon" />
             <span className="appName">KiCKA</span>
           </div>
-          {/* 修正点2: navLinksとheaderIconsを新しいdivで囲み、グループ化 */}
           <div className="navAndIcons">
             <div className="navLinks">
-              <Link to="/">ホーム</Link>
-              <Link to="/gallery">ギャラリー</Link>
-              <Link to="/profile">プロフィール</Link>
+              {/* LinkをNavLinkに置き換える */}
+              <NavLink to="/" end>ホーム</NavLink>
+              <NavLink to="/gallery">ギャラリー</NavLink>
+              <NavLink to="/profile">プロフィール</NavLink>
             </div>
             <div className="headerIcons">
               <img src={userProfile} alt="User Icon" className="userIcon" />
@@ -36,6 +35,6 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-   </Router >
+    </Router >
   );
 }
