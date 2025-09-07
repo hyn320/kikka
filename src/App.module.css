@@ -40,3 +40,28 @@
 .read-the-docs {
   color: #888;
 }
+
+.pageWrapper {
+  position: relative;
+  /* background: black; */
+  min-height: 100vh;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.pageWrapper.show {
+  opacity: 1;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  /* background: black;   ← ここを好きな色に変えればOK */
+  pointer-events: none;
+  transition: opacity 0.8s ease-in-out;
+  opacity: 1;
+}
+
+.overlay.hide {
+  opacity: 0;
+}
