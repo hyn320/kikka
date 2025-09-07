@@ -1,9 +1,9 @@
-/* Gallery.module.css */
 
 /* ページ全体のコンテナ */
 .galleryContainer {
   padding: 1rem;
   height: 100vh;
+  width: 100%;
   overflow-y: auto;
   max-width: 800px;
   margin: 0 auto;
@@ -15,42 +15,6 @@
   font-weight: 700;
   margin-bottom: 1rem;
 }
-
-/* タブボタンのコンテナ
-.tabGroup {
-  display: flex;
-  margin-bottom: 1rem;
-  gap: 1rem;
-}
-
-/* タブボタンの共通スタイル 
-.tabButton {
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-/* 受信タブが選択された時のスタイル 
-.receivedActive {
-  background-color: #D55021;
-}
-
-/* 受信タブが非選択時のスタイル 
-.receivedInactive {
-  background-color: #dbeafe;
-}
-
-/* 送信タブが選択された時のスタイル 
-.sentActive {
-  background-color: #406EB7;
-}
-
-/* 送信タブが非選択時のスタイル 
-.sentInactive {
-  background-color: #dcfce7;
-} 
 
 /* カードリストを囲むコンテナ */
 .cardListContainer {
@@ -70,5 +34,4 @@
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* 80pxに調整 */
   gap: 0.5rem;/* カード間の隙間も小さくする */
 }
-
 

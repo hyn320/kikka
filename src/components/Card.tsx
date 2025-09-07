@@ -1,8 +1,7 @@
-// Card.tsx
 
 import React, { useState } from "react";
 import styles from "./Card.module.css";
-import { motion, AnimatePresence } from "framer-motion";
+
 
 interface CardProps {
   praiseText: string;
@@ -10,16 +9,16 @@ interface CardProps {
   toName: string;
   fromName: string;
   date: string;
-
   type: "received" | "sent";
 }
 
 export default function Card({ praiseText, adviceText, toName, fromName, date, type }: CardProps) {
   const [flipped, setFlipped] = useState(false);
-
   const cardClassName = flipped ? styles.adviceCard : styles.praiseCard;
   const adviceTextClassName = type === "received" ? styles.adviceTextReceived : styles.adviceTextSent;
   const isReceived = type === "received" ? styles.recievedCard : "";
+  const splitedDate = date.split('T');
+
 
   return (
     <div
@@ -32,24 +31,22 @@ export default function Card({ praiseText, adviceText, toName, fromName, date, t
         <div className={styles.cardContent}>
           {type === "sent" && <p>To. {toName}</p>}
           <div className={styles.categoryAndText}>
-            <p className={adviceTextClassName}>💡 アドバイス 💡</p>
-            <p>{adviceText ? adviceText : "アドバイスなし"}</p>
-          </div>
-          <div className={styles.footer}>
+            <p className={styles.titleBack}>💡 アドバイス</p>
+            <p>To. {toName}</p>
+            <p>{adviceText || "アドバイスはありません"}</p>
             <p>From. {fromName}</p>
-            <p>{date}</p>
+            <p className={styles.date}>{splitedDate[0]}</p>
           </div>
         </div>
       ) : (
         <div className={styles.cardContent}>
           {type === "sent" && <p>To. {toName}</p>}
           <div className={styles.categoryAndText}>
-            <p className={styles.praiseText}>✨ 褒め ✨</p>
+            <p className={styles.titleFront}>✨ 褒め ✨</p>
+            <p>To. {toName}</p>
             <p>{praiseText}</p>
-          </div>
-          <div className={styles.footer}>
             <p>From. {fromName}</p>
-            <p>{date}</p>
+            <p className={styles.date}>{splitedDate[0]}</p>
           </div>
         </div>
       )}

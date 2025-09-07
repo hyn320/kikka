@@ -1,14 +1,28 @@
-// src/pages/Gallery.tsx
-import React, { useState } from "react";
+<<<<<<< HEAD
+import React, { useState, useEffect } from "react";
 import CardList from "../components/CardList";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "../lib/supabase";
 import styles from "./Gallery.module.css";
-// App.cssのスタイルはApp.tsxでグローバルに読み込まれているため、ここでのインポートは不要です。
 
 export default function Gallery() {
   const userName = import.meta.env.VITE_USER_NAME;
   const userId = import.meta.env.VITE_USER_ID;
+  const [cardsData, setCardsData] = useState<any[]>([]);
   const [tab, setTab] = useState<"received" | "sent">("received");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("card").select("*");
+      if (error) {
+        console.error(error);
+        return;
+      }
+      setCardsData(data || []);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className={styles.galleryContainer}>
@@ -19,7 +33,7 @@ export default function Gallery() {
           className={tab === "received" ? "active" : ""}
           onClick={() => setTab("received")}
         >
-          受け取り済
+          受取済
         </button>
         <button
           className={tab === "sent" ? "active" : ""}
@@ -38,11 +52,7 @@ export default function Gallery() {
             exit={{ x: tab === "received" ? -300 : 300, opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {tab === "received" ? (
-              <CardList type="received" userName={userName} />
-            ) : (
-              <CardList type="sent" userName={userName} />
-            )}
+            <CardList type={tab} userName={userName} cards={cardsData} />
           </motion.div>
         </AnimatePresence>
       </div>

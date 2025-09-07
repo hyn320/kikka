@@ -1,0 +1,15 @@
+.movieContainer {
+  position: fixed;
+  inset: 0;
+  /* background: black; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease-in-out;
+  opacity: 1;
+  z-index: 50;
+}
+
+.fadeOut {
+  opacity: 0;
+}
