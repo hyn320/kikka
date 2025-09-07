@@ -1,4 +1,7 @@
+// Card.tsx
+
 import React, { useState } from "react";
+import styles from "./Card.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface CardProps {
@@ -7,17 +10,47 @@ interface CardProps {
   toName: string;
   fromName: string;
   date: string;
-  initialSide?: "front" | "back";
+
+  type: "received" | "sent";
 }
 
-export default function Card({ praiseText, adviceText, toName, fromName, date, initialSide = "front" }: CardProps) {
-  const [flipped, setFlipped] = useState(initialSide === "back");
+export default function Card({ praiseText, adviceText, toName, fromName, date, type }: CardProps) {
+  const [flipped, setFlipped] = useState(false);
+
+  const cardClassName = flipped ? styles.adviceCard : styles.praiseCard;
+  const adviceTextClassName = type === "received" ? styles.adviceTextReceived : styles.adviceTextSent;
+  const isrecieve = type === "received" ? styles.recievedCard : "";
 
   return (
-    <div
-      onClick={() => setFlipped(!flipped)}
-      className="w-full h-40 cursor-pointer perspective"
-    >
+  <div
+    className={`${styles.card} ${cardClassName} ${isrecieve}`}
+    onClick={() => setFlipped(!flipped)}
+  >
+      {/* 日付は絶対配置なので、ここには表示しない */}
+
+      {flipped ? (
+        <div className={styles.cardContent}>
+          {type === "sent" && <p>To. {toName}</p>}
+          <div className={styles.categoryAndText}>
+            <p className={adviceTextClassName}>💡 アドバイス 💡</p>
+            <p>{adviceText ? adviceText : "アドバイスなし"}</p>
+          </div>
+          <div className={styles.footer}>
+            <p>From. {fromName}</p>
+            <p>{date}</p>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.cardContent}>
+          {type === "sent" && <p>To. {toName}</p>}
+          <div className={styles.categoryAndText}>
+            <p className={styles.praiseText}>✨ 褒め ✨</p>
+            <p>{praiseText}</p>
+          </div>
+          <div className={styles.footer}>
+            <p>From. {fromName}</p>
+            <p>{date}</p>
+
       <motion.div
         className="relative w-full h-full"
         animate={{ rotateY: flipped ? 180 : 0 }}
@@ -31,24 +64,6 @@ export default function Card({ praiseText, adviceText, toName, fromName, date, i
           <p>{adviceText || "アドバイスはありません"}</p>
         </div>
       </motion.div>
-
-      {/* {flipped ? (
-        <div>
-          <p>To. {toName}</p>
-          <p className="font-semibold text-blue-700 mb-2">💡 アドバイス</p>
-          <p>{adviceText ? adviceText : "アドバイスなし"}</p>
-          <p>From. {fromName}</p>
-          <p>{date}</p>
-        </div>
-      ) : (
-        <div>
-          <p>To. {toName}</p>
-          <p className="font-semibold text-green-700 mb-2">✨ 褒め ✨</p>
-          <p>{praiseText}</p>
-          <p>From. {fromName}</p>
-          <p>{date}</p>
-        </div>
-      )} */}
 
     </div>
   );

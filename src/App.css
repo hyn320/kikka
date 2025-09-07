@@ -1,42 +1,138 @@
+/* src/App.css */
+
+/* ---------------------------------- */
+/* アプリ全体の基本スタイル */
+/* ---------------------------------- */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f4f7; /* アプリ全体の背景色 */
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ---------------------------------- */
+/* ヘッダーとナビゲーションのスタイル */
+/* ---------------------------------- */
+.mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 960px; /* Home.module.cssの幅に合わせる */
+  margin: 0 auto; /* 中央寄せ */
+  padding: 1rem 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* 新規追加: ナビゲーションとアイコンをグループ化 */
+.navAndIcons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* ナビゲーションとアイコン間のスペース */
 }
 
-.card {
-  padding: 2em;
+/* ナビゲーションリンクのコンテナ */
+.navLinks {
+  display: flex;
+  justify-content: space-around; /* リンクを均等に配置 */
+  align-items: center;
+  background-color: #e0e0e0; /* ナビゲーションの背景色 */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  gap: 1rem; /* リンク間のスペース */
 }
 
-.read-the-docs {
-  color: #888;
+.headerIcons { /* アイコン群をまとめる新しいコンテナ */
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* アイコン間のスペース */
+}
+
+/* ロゴとアプリ名のエリア */
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ---------------------------------- */
+/* アイコンとテキストのスタイル調整 */
+/* ---------------------------------- */
+.logoIcon { /* 会社のアイコン */
+  width: 1.5rem; /* ★サイズを調整★ */
+  height: 1.5rem; /* ★サイズを調整★ */
+  border-radius: 50%; /* 丸く切り抜く */
+  object-fit: cover; /* 画像の比率を保ちつつ要素にフィットさせる */
+}
+
+.appName {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #1f2937;
+}
+
+.userIcon { /* ユーザーのプロフィール画像 */
+  width: 1.5rem; /* ★サイズを調整 (会社のロゴより少し大きくてもOK)★ */
+  height: 1.5rem; /* ★サイズを調整★ */
+  border-radius: 50%; /* 丸く切り抜く */
+  object-fit: cover; /* 画像の比率を保ちつつ要素にフィットさせる */
+}
+
+/* ---------------------------------- */
+/* 不要なViteデフォルトスタイルを削除 */
+/* ---------------------------------- */
+/* #rootのmax-width, padding, text-align は body, mainHeader で制御されるため削除 */
+/* .logo, .card, .read-the-docs 関連のスタイルも削除 */
+/* @keyframes logo-spin や @media (prefers-reduced-motion: no-preference) も削除 */
+
+/* ナビゲーションリンクのスタイル */
+.navLinks a {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none; /* 下線を削除 */
+  color: #333; /* デフォルトの文字色 */
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* アクティブなリンクのスタイル */
+.navLinks a.active {
+  background-color: #26667f; /* 選択中の背景色 */
+  color: white; /* 選択中の文字色 */
+  font-weight: bold; /* 選択中の文字を太くする */
+}
+
+/* src/App.css */
+
+/* ...（省略）... */
+
+/* ナビゲーションリンクとボタンの共通スタイル */
+.navLinks a, .navLinks button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  outline: none; /* ← ここを追加：黒い枠線を消す */
+}
+
+/* アクティブなリンクとボタンのスタイル */
+.navLinks a.active, .navLinks button.active {
+  background-color: #26667f;
+  color: white;
+  font-weight: bold;
+}
+
+/* フォーカス時のスタイル（アクセシビリティ対応） */
+.navLinks a:focus, .navLinks button:focus {
+  box-shadow: 0 0 0 2px rgba(38, 102, 127, 0.5); /* ぼんやりした青色のシャドウ */
 }
