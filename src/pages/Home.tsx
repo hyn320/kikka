@@ -3,6 +3,10 @@ import { supabase } from "../lib/supabase";
 import styles from "./Home.module.css";
 
 export default function Home() {
+
+  const userId = import.meta.env.VITE_USER_ID;
+  const userName = import.meta.env.VITE_USER_NAME;
+
   const [to, setTo] = useState("");
   const [praisedComment, setPraisedComment] = useState("");
   const [adviceComment, setAdviceComment] = useState("");

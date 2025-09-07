@@ -62,11 +62,13 @@ export default function Profile() {
           alt="user avatar"
           className={styles.avatar}
         />
+
         <div className={styles.infoTextContainer}>
           <p className={styles.userName}>{name}</p>
           <p className={styles.detailText}>所属: {community}</p>
           <p className={styles.detailText}>社内メール: {email}</p>
-          <p className={styles.detailText}>入社日: {joinedAt}</p>
+          <p className={styles.detailText}>メンバーになった日: {joinedAt}</p>
+
         </div>
       </div>
 

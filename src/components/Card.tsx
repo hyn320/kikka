@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./Card.module.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface CardProps {
   praiseText: string;
@@ -9,6 +10,7 @@ interface CardProps {
   toName: string;
   fromName: string;
   date: string;
+
   type: "received" | "sent";
 }
 
@@ -48,9 +50,21 @@ export default function Card({ praiseText, adviceText, toName, fromName, date, t
           <div className={styles.footer}>
             <p>From. {fromName}</p>
             <p>{date}</p>
-          </div>
+
+      <motion.div
+        className="relative w-full h-full"
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="absolute w-full h-full backface-hidden bg-yellow-100 rounded-xl p-4 shadow">
+          <p>{praiseText}</p>
         </div>
-      )}
+
+        <div className="absolute w-full h-full backface-hidden bg-green-100 rounded-xl p-4 shadow rotateY-180">
+          <p>{adviceText || "アドバイスはありません"}</p>
+        </div>
+      </motion.div>
+
     </div>
   );
 }

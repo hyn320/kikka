@@ -1,7 +1,8 @@
-// src/App.tsx
-import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link, NavLink } from "react-router-dom";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
+import Movie from "./components/Movie";
 import Profile from "./pages/Profile";
 import "./App.css";
 
@@ -9,32 +10,38 @@ import companyLogo from './assets/kicka.png';
 import userProfile from './assets/yuka.jpg';
 
 export default function App() {
+  const [showVideo, setShowVideo] = useState(true);
+
   return (
     <Router>
-      <div>
-        <div className="mainHeader">
-          <div className="logoArea">
-            <img src={companyLogo} alt="Company Logo" className="logoIcon" />
-            <span className="appName">KiCKA</span>
-          </div>
-          <div className="navAndIcons">
-            <div className="navLinks">
-              {/* LinkをNavLinkに置き換える */}
-              <NavLink to="/" end>ホーム</NavLink>
-              <NavLink to="/gallery">ギャラリー</NavLink>
-              <NavLink to="/profile">プロフィール</NavLink>
+      {showVideo ? (
+        <Movie onFinish={() => setShowVideo(false)} />
+      ) : (
+        <>
+          <div className="mainHeader">
+            <div className="logoArea">
+              <img src={companyLogo} alt="Company Logo" className="logoIcon" />
+              <span className="appName">KiCKA</span>
             </div>
-            <div className="headerIcons">
-              <img src={userProfile} alt="User Icon" className="userIcon" />
+            <div className="navAndIcons">
+              <div className="navLinks">
+                <NavLink to="/" end>ホーム</NavLink>
+                <NavLink to="/gallery">ギャラリー</NavLink>
+                <NavLink to="/profile">プロフィール</NavLink>
+              </div>
+              <div className="headerIcons">
+                <img src={userProfile} alt="User Icon" className="userIcon" />
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </Router >
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/gallery/*" element={<Gallery />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </>
+      )}
+    </Router>
   );
 }
