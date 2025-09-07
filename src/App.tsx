@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, NavLink } from "react-router-dom";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
-import Profile from "./pages/Profile";
 import Movie from "./components/Movie";
 import styles from "./App.module.css";  // ← module.cssに変更
+import Profile from "./pages/Profile";
+import companyLogo from './assets/kicka.png';
+import userProfile from './assets/yuka.jpg';
 
 export default function App() {
   const [showVideo, setShowVideo] = useState(true);
@@ -21,13 +23,23 @@ export default function App() {
       {showVideo ? (
         <Movie onFinish={handleMovieFinish} />
       ) : (
-        <div className={`${styles.pageWrapper} ${fadeIn ? styles.show : ""}`}>
-          <div className={`${styles.overlay} ${fadeIn ? styles.hide : ""}`} />
-          <div className="flex justify-around bg-gray-100 p-4">
-            <Link to="/">ホーム</Link>
-            <Link to="/gallery">ギャラリー</Link>
-            <Link to="/profile">プロフィール</Link>
-          </div>
+
+        <>
+          <div className="mainHeader">
+            <div className="logoArea">
+              <img src={companyLogo} alt="Company Logo" className="logoIcon" />
+              <span className="appName">KiCKA</span>
+            </div>
+            <div className="navAndIcons">
+              <div className="navLinks">
+                <NavLink to="/" end>ホーム</NavLink>
+                <NavLink to="/gallery">ギャラリー</NavLink>
+                <NavLink to="/profile">プロフィール</NavLink>
+              </div>
+              <div className="headerIcons">
+                <img src={userProfile} alt="User Icon" className="userIcon" />
+              </div>
+            </div>
 
           <Routes>
             <Route path="/" element={<Home />} />
@@ -35,6 +47,7 @@ export default function App() {
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
+      </>
       )}
     </Router>
   );

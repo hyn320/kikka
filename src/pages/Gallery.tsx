@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import CardList from "../components/CardList";
 import { motion, AnimatePresence } from "framer-motion";
@@ -5,9 +6,10 @@ import { supabase } from "../lib/supabase";
 import styles from "./Gallery.module.css";
 
 export default function Gallery() {
-  const userName = "鈴木花子";
-  const [tab, setTab] = useState<"received" | "sent">("received");
+  const userName = import.meta.env.VITE_USER_NAME;
+  const userId = import.meta.env.VITE_USER_ID;
   const [cardsData, setCardsData] = useState<any[]>([]);
+  const [tab, setTab] = useState<"received" | "sent">("received");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,25 +25,26 @@ export default function Gallery() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h1 className="text-xl font-bold mb-4">ギャラリー</h1>
-      <div className={styles.tabContainer}>
+    <div className={styles.galleryContainer}>
+      <h1 className={styles.heading}>ギャラリー</h1>
+      
+      <div className="navLinks">
         <button
-          className={`${styles.button} ${tab === "received" ? styles.buttonReceived : styles.buttonNotReceived}`}
+          className={tab === "received" ? "active" : ""}
           onClick={() => setTab("received")}
         >
-          受信
+          受取済
         </button>
         <button
-          className={`${styles.button} ${tab === "sent" ? styles.buttonSent : styles.buttonNotSent}`}
+          className={tab === "sent" ? "active" : ""}
           onClick={() => setTab("sent")}
         >
-          送信
+          送信済
         </button>
       </div>
-
-      <div className={styles.cardsWrapper}>
-        <AnimatePresence exitBeforeEnter>
+      
+      <div className={styles.cardListContainer}>
+        <AnimatePresence mode="wait">
           <motion.div
             key={tab}
             initial={{ x: tab === "received" ? 300 : -300, opacity: 0 }}

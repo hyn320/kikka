@@ -1,0 +1,134 @@
+/* src/pages/Home.css */
+
+/* src/pages/Home.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f0f4f7;
+  width: 100%;
+}
+
+.contentWrapper {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* コンテンツ全体を中央寄せに維持 */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between; /* ヘッダー内の要素を左右に分ける */
+  align-items: center;
+  width: 100%;
+  max-width: 960px; /* contentWrapperの幅に合わせる */
+  margin-bottom: 2rem;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+}
+
+.appName {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #1f2937;
+}
+
+.notificationIcon {
+  width: 24px;
+  height: 24px;
+  background-color: #9ca3af;
+  border-radius: 50%;
+}
+
+/* ... (以降のスタイルは変更なし) ... */
+
+.cardForm {
+  background-color: #e0f0f5;
+  padding: 3rem; /* パディングを増やす */
+  border-radius: 20px;
+  width: 100%;
+  /* ★ここを調整します★ */
+  max-width: 800px; /* 例: 500pxから800pxに */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 9999px; /* rounded-full に相当 */
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.toLabel {
+  font-weight: 600;
+  color: #4b5563; /* Tailwindのtext-gray-600に相当 */
+  margin-right: 0.5rem;
+}
+
+.formInput {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.textareaGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.formTextarea {
+  flex: 1;
+  height: 10rem; /* 高さを増やす */
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.fromName {
+  text-align: right;
+  color: #6b7280;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.submitButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.submitButton {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 4px solid #d1d5db;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: #9ca3af;
+  cursor: pointer;
+  background-color: transparent;
+  writing-mode: horizontal-tb !important;
+}

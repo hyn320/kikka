@@ -1,41 +1,47 @@
 import React, { useState } from "react";
+import styles from "./Profile.module.css";
+import yukaAvatar from "../assets/yuka.jpg";
 
 export default function Profile() {
-  const [name] = useState("Alice");
+  const [name] = useState("田中優香");
   const [community] = useState("開発チーム");
-  const [email] = useState("alice@example.com");
+  const [email] = useState("yuka@example.com");
   const [joinedAt] = useState("2023-04-01");
-  const [avatar] = useState("https://via.placeholder.com/80");
+  const [avatar] = useState(yukaAvatar);
 
   const [showSettings, setShowSettings] = useState(false);
+  const [activePage, setActivePage] = useState("profile");
 
   if (showSettings) {
     // 設定画面（ダミー）
     return (
-      <div className="p-4">
-        <h1 className="text-xl font-bold mb-4">設定・アクセシビリティ</h1>
-        <div className="flex flex-col gap-3">
+      <div className={styles.settingsContainer}>
+        <h1 className={styles.heading}>設定・アクセシビリティ</h1>
+        <div className={styles.settingsButtonGroup}>
           <button
             onClick={() => alert("設定はダミーです")}
-            className="px-4 py-2 bg-gray-500 text-white rounded"
+            className={styles.settingsButton}
           >
             設定
           </button>
           <button
             onClick={() => alert("アクセシビリティはダミーです")}
-            className="px-4 py-2 bg-gray-500 text-white rounded"
+            className={styles.settingsButton}
           >
             アクセシビリティ
           </button>
           <button
             onClick={() => alert("コミュニティ追加はダミーです")}
-            className="px-4 py-2 bg-gray-500 text-white rounded"
+            className={styles.settingsButton}
           >
             コミュニティを追加
           </button>
           <button
-            onClick={() => setShowSettings(false)}
-            className="px-4 py-2 bg-red-500 text-white rounded"
+            onClick={() => {
+              setShowSettings(false);
+              setActivePage("profile"); // プロフィール画面に戻る時にステートを更新
+            }}
+            className={styles.backButton}
           >
             戻る
           </button>
@@ -46,35 +52,43 @@ export default function Profile() {
 
   // 通常のプロフィール画面
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">プロフィール</h1>
+    <div className={styles.profileContainer}>
+      <h1 className={styles.heading}>プロフィール</h1>
 
       {/* ユーザー情報 */}
-      <div className="flex items-center gap-4 mb-6">
+      <div className={styles.userInfoSection}>
         <img
           src={avatar}
           alt="user avatar"
-          className="w-20 h-20 rounded-full border"
+          className={styles.avatar}
         />
-        <div>
-          <p className="font-semibold text-lg">{name}</p>
-          <p className="text-gray-500">所属: {community}</p>
-          <p className="text-gray-500">社内メール: {email}</p>
-          <p className="text-gray-500">メンバーになった日: {joinedAt}</p>
+
+        <div className={styles.infoTextContainer}>
+          <p className={styles.userName}>{name}</p>
+          <p className={styles.detailText}>所属: {community}</p>
+          <p className={styles.detailText}>社内メール: {email}</p>
+          <p className={styles.detailText}>メンバーになった日: {joinedAt}</p>
+
         </div>
       </div>
 
       {/* ボタン群 */}
-      <div className="flex gap-4 mb-6">
+      <div className={styles.buttonGroup}>
         <button
-          onClick={() => alert("プロフィール編集はダミーです")}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          onClick={() => {
+            alert("プロフィール編集はダミーです");
+            setActivePage("profile"); // クリック時にステートを更新
+          }}
+          className={`${styles.button} ${styles.editButton} ${activePage === "profile" ? styles.activeButton : ""}`}
         >
           プロフィール編集
         </button>
         <button
-          onClick={() => setShowSettings(true)}
-          className="px-4 py-2 bg-gray-500 text-white rounded"
+          onClick={() => {
+            setShowSettings(true);
+            setActivePage("settings"); // クリック時にステートを更新
+          }}
+          className={`${styles.button} ${styles.settingsButton} ${activePage === "settings" ? styles.activeButton : ""}`}
         >
           設定・アクセシビリティ
         </button>

@@ -1,41 +1,37 @@
-.container {
-  padding: 1rem; /* Tailwind の p-4 相当 */
-  height: 100vh; /* h-screen */
+
+/* ページ全体のコンテナ */
+.galleryContainer {
+  padding: 1rem;
+  height: 100vh;
   width: 100%;
   overflow-y: auto;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.tabContainer {
-  display: flex;
-  gap: 1rem; /* Tailwind の gap-4 */
-  margin-bottom: 1rem; /* Tailwind の mb-4 */
+/* ページ見出しのスタイル */
+.heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-.button {
-  padding: 0.5rem 1rem; /* Tailwind の px-4 py-2 */
-  border-radius: 0.5rem; /* Tailwind の rounded */
-  cursor: pointer;
-}
-
-.buttonReceived {
-  background-color: #93c5fd; /* Tailwind bg-blue-300 */
-}
-
-.buttonNotReceived {
-  background-color: #bfdbfe; /* Tailwind bg-blue-100 */
-}
-
-.buttonSent {
-  background-color: #86efac; /* Tailwind bg-green-300 */
-}
-
-.buttonNotSent {
-  background-color: #bbf7d0; /* Tailwind bg-green-100 */
-}
-
-.cardsWrapper {
+/* カードリストを囲むコンテナ */
+.cardListContainer {
   overflow: hidden;
-  width: 100%; /* 横幅を広げる */
-  /* max-width: 1200px; 必要に応じて */
-  margin: 0 auto; /* 中央寄せ */
+  margin-top: 2rem; /* ← この行を追加 */
 }
+
+/* Gallery.module.css */
+
+/* ...（省略）... */
+
+/* カードセクションのコンテナ */
+.cardSection {
+  margin-bottom: 2rem;
+  display: grid;
+  /* 以下の行を修正します */
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* 80pxに調整 */
+  gap: 0.5rem;/* カード間の隙間も小さくする */
+}
+
